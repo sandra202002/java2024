@@ -1,41 +1,34 @@
 import java.util.Scanner;
-class Auth extends Exception
-{
-	Auth(String msg)
-	{
-		super(msg);
-	}
+
+class AuthException extends Exception {
+    AuthException(String msg) {
+        super(msg);
+    }
 }
 
-class Prgrm13
-{
-	public static void main(String arg[])
-	{
-		Scanner s=new Scanner(System.in);
-		String username="akhil";
-		String password="123";
+public class AuthenticationSystem {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String username = "akhil";
+        String password = "123";
 
-		System.out.println("enter the username");
-		String user=s.nextLine();
-		System.out.println("enter the password");
-		String pass=s.nextLine();
+        System.out.println("Enter the username:");
+        String inputUsername = scanner.nextLine();
 
-		try
-		{
-			if(user.equals(username) && pass.equals(password))
-				throw new Auth("Login Success !");
-			else 
-				throw new Auth("Login Failed !");
-		}
+        System.out.println("Enter the password:");
+        String inputPassword = scanner.nextLine();
 
-		catch(Auth a)
-		{
-			System.out.println(a);
-		}
-
-		finally
-		{
-			System.out.println("Authentication Done");
-		}
-	}
+        try {
+            if (inputUsername.equals(username) && inputPassword.equals(password)) {
+                throw new AuthException("Login Successful!");
+            } else {
+                throw new AuthException("Login Failed! Invalid username or password.");
+            }
+        } catch (AuthException e) {
+            System.out.println( e);
+        } finally {
+            System.out.println("Authentication Done");
+            scanner.close();
+        }
+    }
 }
